@@ -20,3 +20,6 @@ Data*.fs*
 coverage
 test
 *.sqlite
+*.venv
+.pdm-python
+.pdm-build

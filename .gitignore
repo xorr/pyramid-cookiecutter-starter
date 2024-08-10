@@ -4,3 +4,6 @@ __pycache__
 /env*/
 .DS_Store
 .idea
+*.venv
+.pdm-python
+.pdm-build

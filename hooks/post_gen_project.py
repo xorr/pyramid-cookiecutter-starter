@@ -125,14 +125,14 @@ def display_actions_message():
         Change directory into your newly created project.
             cd {{ cookiecutter.repo_name }}
 
-        Create a Python virtual environment.
-            %(venv_cmd)s %(venv)s
+        Create a Python virtual environment, create pdm.lock file, and install dpendencies in the virtualenv
 
-        Upgrade packaging tools.
-            %(pip_cmd)s install --upgrade pip setuptools
+            pdm install
 
-        Install the project in editable mode with its testing requirements.
-            %(pip_cmd)s install -e ".[testing]"
+        Activate the virtualenv 
+        
+            eval $(pdm venv activate)
+
 
         {% if cookiecutter.backend == 'sqlalchemy' -%}
         Initialize and upgrade the database using Alembic.

@@ -1,0 +1,82 @@
+[project]
+name = "{{ cookiecutter.repo_name }}"
+version = "0.1.0"
+description = "{{ cookiecutter.project_name }}"
+# TODO: add authors if needed (optional)
+# authors = [
+#     {name = "", email = ""},
+# ]
+dependencies = [
+    'plaster_pastedeploy',
+    'pyramid',
+    'pyramid_{{ cookiecutter.template_language }}',
+    'pyramid_debugtoolbar',
+    'waitress',
+    {%- if cookiecutter.backend == 'sqlalchemy' %}
+    'alembic',
+    'pyramid_retry',
+    'pyramid_tm',
+    'SQLAlchemy>=2.0',
+    'transaction',
+    'zope.sqlalchemy',
+    {%- elif cookiecutter.backend == 'zodb' %}
+    'pyramid_retry',
+    'pyramid_tm',
+    'pyramid_zodbconn',
+    'transaction',
+    'ZODB',
+    {%- endif %}
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = [
+    "web pyramid pylons",
+]
+classifiers = [
+    "Framework :: Pyramid",
+    "Programming Language :: Python",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
+]
+
+# TODO: add project URLs if needed (optional)
+# [project.urls]
+# Homepage = "https://example.com"
+# Documentation = "https://readthedocs.org"
+# Repository = "https://github.com/me/spam.git"
+# Issues = "https://github.com/me/spam/issues"
+# Changelog = "https://github.com/me/spam/blob/master/CHANGELOG.md"
+
+
+{%- if cookiecutter.backend == 'sqlalchemy' %}
+[project.scripts]
+initialize_{{ cookiecutter.repo_name }}_db = "{{ cookiecutter.repo_name }}.scripts.initialize_db:main"
+{%- endif %}
+
+[project.entry-points."paste.app_factory"]
+main = "{{ cookiecutter.repo_name }}:main"
+
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.build]
+includes = ["{{ cookiecutter.repo_name }}"]
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "cookiecutter",
+    "pytest",
+    "pytest-cookies",
+    "pytest-venv",
+]
+testing = [
+    "WebTest",
+    "pytest",
+    "pytest-cov",
+]

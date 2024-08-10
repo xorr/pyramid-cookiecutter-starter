@@ -51,7 +51,7 @@ Usage
     .. code-block:: bash
 
         # Change directory into your newly created project if not already there. Your
-        # current directory should be the same as this README.md and pyproject.toml.
+        # current directory should be the same as this README.md and pyproject.toml files.
         $ cd <my_project>
         # Create a Python virtual environment, if not already created.
         $ python3 -m venv env
